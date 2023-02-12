@@ -66,15 +66,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          onClick={ dynamicDialog }
-        >
-          Learn React
-        </a>
+            <img src={logo} className="App-logo" alt="logo" />
+            <button onClick={ dynamicDialog } >
+                Open Dynamic Dialog
+            </button>
       </header>
     </div>
   );
