@@ -19,7 +19,7 @@ Component extended @mui/dialog, dynamic dialog view controller.
 ## API Reference
 
 ```http
-  AISDialogActionViewController ( dialogActionView )
+  AISDialogActionViewController
 ```
 
 | Property  | Type                    | Description                |
@@ -31,6 +31,9 @@ Component extended @mui/dialog, dynamic dialog view controller.
 | `setDisabled` | `boolean` | "Disable/enable button"|
 | `setInProcess` | `boolean` | "Show/hide button spinner"|
 | `remove` | `void` | "Remove button"|
+
+
+#### Get item
 
 ```http
   AISDialogViewController
@@ -45,16 +48,36 @@ Component extended @mui/dialog, dynamic dialog view controller.
 | `setActions` | `Array<dialogActionView>` | "Collection items instance of AISDialogActionViewController"|
 | `setDraggable` | `boolean` | "Drag enable/disable" |
 | `setMaxWidth` | `DialogMaxSizeType` | "xs", "sm", "md", "lg", "xl"|
+| `setState` | `compoent state` | "dialog.setState({...dialog.state, newKey: newValue})"|
 | `show` | `void` | "Show dialog" |
 
 
+
+## Acknowledgements
+
+
+
+
+## Development
+
+Create react app
+```bash
+  npm install @appinsource/material/dynamic-dialog
+```
+
+
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)
 
-## Authors
-Süleyman Topaloglu
 
+## Authors
+
+
+
+Süleyman Topaloglu Frontend/Backend developer since 2013
 ## Usage/Examples
+
  - You have a complete working [Demo](https://codesandbox.io/s/dynamic-react-dialog-view-controller-yop9q5)
 
 
@@ -71,8 +94,10 @@ Süleyman Topaloglu
 
             const closeAction = new dialogActionView()
                     .setLabel('Close')
-                    .setAction((button, modal1) => {
-                        modal1.close();
+                    .setAction((button, dialog1) => {
+                        // Example useState
+                        // console.log('Added key in state', dialog1.state.newKey );
+                        dialog1.close();
                     });
 
                 const updateAction = new dialogActionView()
@@ -118,7 +143,9 @@ Süleyman Topaloglu
                     // Or 
                     // .setActions([ closeAction, updateAction ])
                     .setMaxWidth('md')
-                    .show( ( modal, component ) => {
+                    .show( dialog1 => {
+                        // Example useState
+                        // dialog1.setState({...dialog1.state, newKey: 'newValue'})
                     });
 
 
