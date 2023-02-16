@@ -55,7 +55,8 @@ Component extended @mui/dialog, dynamic dialog view controller.
 ## Acknowledgements
 
 ```http
-  If you have bad performance with state use instead of repo dialog.setState({...dialog.state, ... }) --> dialog.setRepo({...dialog.repo, ... })
+  You can use faster performance repo, if you have bad performance with state 
+  dialog.setState({...dialog.state, ... }) --> dialog.setRepo({...dialog.repo, ... })
 ```
 
 
