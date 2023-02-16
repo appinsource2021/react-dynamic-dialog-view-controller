@@ -33,7 +33,6 @@ Component extended @mui/dialog, dynamic dialog view controller.
 | `remove` | `void` | "Remove button"|
 
 
-#### Get item
 
 ```http
   AISDialogViewController
@@ -55,7 +54,9 @@ Component extended @mui/dialog, dynamic dialog view controller.
 
 ## Acknowledgements
 
-
+```http
+  If you have bad performance with state use instead of repo dialog.setState({...dialog.state, ... }) --> dialog.setRepo({...dialog.repo, ... })
+```
 
 
 ## Development
