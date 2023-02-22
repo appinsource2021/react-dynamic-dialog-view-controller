@@ -7,6 +7,12 @@ Component extended @mui/dialog, dynamic dialog view controller.
 ```bash
   npm install @appinsource/material/dynamic-dialog
 ```
+
+## New Features
+
+```bash
+  Until version 1.0.14 content prop was setContent(<component>Content</component>), from version 1.1.1 content setContent( dialog => <component>Content</component>)
+```
     
 ## Features
 
@@ -33,6 +39,7 @@ Component extended @mui/dialog, dynamic dialog view controller.
 | `remove` | `void` | "Remove button"|
 
 
+#### Get item
 
 ```http
   AISDialogViewController
@@ -42,7 +49,7 @@ Component extended @mui/dialog, dynamic dialog view controller.
 | :-------- | :------- | :-------------------------------- |
 | `setTitle` | `compoent or string` | dialog title |
 | `setSubTitle` | `compoent or string` | "dialog subtitle"|
-| `setContent` | `compoent or string` | "Dialog content"|
+| `setContent` | `Callback Function` | "Return component or string setContent( dialog => { return <div>Content<div/>})"|
 | `setAction` | `dialogActionView` | "Instance of AISDialogActionViewController"|
 | `setActions` | `Array<dialogActionView>` | "Collection items instance of AISDialogActionViewController"|
 | `setDraggable` | `boolean` | "Drag enable/disable" |
@@ -54,10 +61,7 @@ Component extended @mui/dialog, dynamic dialog view controller.
 
 ## Acknowledgements
 
-```http
-  You can faster performance repo use, if you have bad performance with state 
-  dialog.setState({...dialog.state, ... }) --> dialog.setRepo({...dialog.repo, ... })
-```
+
 
 
 ## Development
@@ -84,84 +88,80 @@ Süleyman Topaloglu Frontend/Backend developer since 2013
 
 
 ```javascript
-    import React from 'react';
     import logo from './logo.svg';
     import './App.css';
-    import Button from "@mui/material/Button";
-    import AISDialogViewController, { dialogActionView } from "@appinsource/material/dynamic-dialog";
-
+    import AISDialogViewController, {dialogActionView} from "@appinsource/material/dynamic-dialog"
+    
     function App() {
-
-        const handleClick = () => {
-
+    
+        const dynamicDialog = () => {
             const closeAction = new dialogActionView()
-                    .setLabel('Close')
-                    .setAction((button, dialog1) => {
-                        // Example useState
-                        // console.log('Added key in state', dialog1.state.newKey );
-                        dialog1.close();
-                    });
-
-                const updateAction = new dialogActionView()
-                    .setLabel('Update me')
-                    .setVariant('contained')
-                    .setColor('warning')
-                    .setAction( (button, dialog) => {
-                        dialog.setContent('Content updated and closing in 3 sec');
-                        button.setInProcess(true).setDisabled( true ).setColor('success');
-                        setTimeout(()=>{
-                            dialog.setContent('Success');
-
-                            button
-                                .setLabel('Ok!')
-                                .setDisabled(false)
-                                .setInProcess(false)
-                                .setVariant('text');
-
-                            closeAction.remove();
-
-                            button.setAction( ((button1, dialog1) => {
-                                dialog1
-                                    .setContent('Button Action changed another trigged will closing in 5 sec.');
-                                button1.setLabel('Inline Clicked').setDisabled(true);
-                                setTimeout(()=>{
-                                    dialog1.setContent('Dialog closing in 3 sec');
-                                    button1.setColor('warning').setDisabled(false);
-                                    setTimeout(()=>{
+                .setLabel("Close")
+                .setAction((button, modal1) => {
+                    modal1.close();
+                });
+    
+            const updateAction = new dialogActionView()
+                .setLabel("Update")
+                .setVariant("contained")
+                .setColor("warning")
+                .setAction((button, dialog) => {
+                    // Update Dialog content
+                    dialog.setContent(dialog1 => "Dialog Content updated with this text" );
+                    // Update updateAction
+                    button.setInProcess(true).setDisabled(true).setColor("success");
+    
+                    setTimeout(() => {
+                        dialog.setContent(dialog1 => "Dialog Content updated again with this text" );
+                        button
+                            .setLabel("Ok!")
+                            .setDisabled(false)
+                            .setInProcess(false)
+                            .setVariant("text");
+                        closeAction.setVariant('contained').setColor('success');
+                        button.setAction((button1, dialog1) => {
+                            dialog1.setContent( dialog2 => "3. time Dialog Content updated, and changed again in 5 sec.");
+                            dialog1.setTitle('Changed Title to...');
+                            button1.setLabel("Inline Clicked").setDisabled(true);
+                            setTimeout(() => {
+                                dialog1.setContent( dialog2 => "last time Dialog updatged and closing in 3 sec" );
+                                button1
+                                    .setColor("warning")
+                                    .setDisabled(false)
+                                    .setAction((button, dialog) => {
                                         dialog1.close();
-                                    }, 3000)
-                                }, 5000)
-                            }))
-                        }, 3000 );
-                    });
-
-                const dialog = new AISDialogViewController();
-                dialog
-                    .setTitle('I\'m a dynamic dialog view')
-                    .setDraggable(true)
-                    .setContent('Dynamic dialog content')
-                    .setAction( closeAction )
-                    .setAction( updateAction )
-                    // Or 
-                    // .setActions([ closeAction, updateAction ])
-                    .setMaxWidth('md')
-                    .show( dialog1 => {
-                        // Example useState
-                        // dialog1.setState({...dialog1.state, newKey: 'newValue'})
-                    });
-
-
-        }
-
-        return (
-            <div className="App">
-                <Button variant={'contained'} onClick={handleClick}>
-                    Open dynamic dialog
-                </Button>
-            </div>
-        );
+                                    });
+                                setTimeout(() => {
+                                    dialog1.close();
+                                }, 3000);
+                            }, 5000);
+                        });
+                    }, 3000);
+                });
+            const dialog = new AISDialogViewController();
+            dialog
+                .setTitle("I'm a dynamic dialog view")
+                .setDraggable(true)
+                .setContent(dialog1 => "Inital Content" )
+                .setAction(closeAction)
+                .setAction(updateAction)
+                .setMaxWidth("md")
+                .show((modal, component) => {});
+        };
+    
+      return (
+        <div className="App">
+          <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo" />
+                <button onClick={ dynamicDialog } >
+                    Open Dynamic Dialog
+                </button>
+          </header>
+        </div>
+      );
     }
     
     export default App;
+
 ```
 
