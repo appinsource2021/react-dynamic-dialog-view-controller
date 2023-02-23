@@ -165,7 +165,7 @@ Süleyman Topaloglu Frontend/Backend developer since 2013
   
 ```
 
-```http
+```bash
   Support this package!
   If you like this package, consider giving it a github star ⭐
 
