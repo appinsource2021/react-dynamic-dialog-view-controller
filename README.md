@@ -162,8 +162,10 @@ Süleyman Topaloglu Frontend/Backend developer since 2013
     }
     
     export default App;
-
+  
 ```
+
+```http
   Support this package!
   If you like this package, consider giving it a github star ⭐
 
