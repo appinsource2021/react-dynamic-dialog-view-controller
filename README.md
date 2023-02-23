@@ -165,10 +165,9 @@ Süleyman Topaloglu Frontend/Backend developer since 2013
 
 ```
   Support this package!
-If you like this package, consider giving it a github star ⭐
+  If you like this package, consider giving it a github star ⭐
 
-Also, PR's are welcome!
-
+  Also, PR's are welcome!
 ```
 
 
