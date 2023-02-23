@@ -172,6 +172,8 @@ Süleyman Topaloglu Frontend/Backend developer since 2013
   If you like this package, consider giving it a github star ⭐
 
   Also, PR's are welcome!
+  
+  Any question: devloper@appinsource.eu
 
 
 
